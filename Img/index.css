@@ -1,0 +1,29 @@
+.boton {
+    width: 80%;
+    height: 22px;
+    background-color: rgb(200, 184, 184);
+    color: #000;
+    cursor: pointer;
+
+}
+
+input {
+    width: 20%;
+    height: 100%;
+}
+
+h2,
+h4 {
+    background-color: rgb(225, 220, 220);
+    width: 10%;
+    height: 25px;
+    font-size: 11PX;
+}
+
+div {
+    width: 10%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
