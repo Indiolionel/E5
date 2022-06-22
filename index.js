@@ -20,13 +20,13 @@ const pizzaCuatroQ = new Pizza(3, "4 Queso", ["Roquefort", " Muzzarella", " Ched
 const pizzaAnana = new Pizza(4, "Anana", ["Anana", " Muzzarella", " Jamon", " Aceitunas"], 954, "Anana.jpg");
 const pizzaCalabresa = new Pizza(5, "Calabresa", ["Calabresa", " Muzzarella", " Aceitunas negras"], 854, "Calabresa.jpg");
 const pizzaAnchoas = new Pizza(6, "Anchoas", ["Anchoas", " Muzzarella", " Aceitunas negras"], 654, "Anchoas.jpg");
-const pizzaPalmito = new Pizza(6, "Palmito", ["Palmitos", " Muzzarella","Salsa Golf", " Aceitunas"], 994, "Palmito.jpg");
-const pizzaPoyo = new Pizza(6, "Poyo", ["Poyo", " Muzzarella","morron","cebolla", " Aceitunas negras"], 874, "Poyo.jpg");
-const pizzaFugazzeta = new Pizza(6, "Fugazzeta", ["Fugazzeta", " Muzzarella","cebolla cocida","Jamon Crudo", " Aceitunas"], 724, "Fugazzeta.jpg");
+const pizzaPalmito = new Pizza(6, "Palmito", ["Palmitos", " Muzzarella", "Salsa Golf", " Aceitunas"], 994, "Palmito.jpg");
+const pizzaPoyo = new Pizza(6, "Poyo", ["Poyo", " Muzzarella", "morron", "cebolla", " Aceitunas negras"], 874, "Poyo.jpg");
+const pizzaFugazzeta = new Pizza(6, "Fugazzeta", ["Fugazzeta", " Muzzarella", "cebolla cocida", "Jamon Crudo", " Aceitunas"], 724, "Fugazzeta.jpg");
 
 
 
-pizzas.push(pizzaMuzza, pizzaRoquefort, pizzaCuatroQ, pizzaAnana, pizzaCalabresa, pizzaAnchoas,pizzaPalmito,pizzaPoyo,pizzaFugazzeta)
+pizzas.push(pizzaMuzza, pizzaRoquefort, pizzaCuatroQ, pizzaAnana, pizzaCalabresa, pizzaAnchoas, pizzaPalmito, pizzaPoyo, pizzaFugazzeta)
 
 const body = document.getElementsByTagName("body")
 const div = document.createElement("div");
@@ -70,29 +70,28 @@ function mostrarInfo(nombre, precio, img, ingredientes) {
     `;
 }
 
-function infoIncorrect () {
-    // const clase = document.getElementById("render")
+function infoIncorrect() {
     seccion.innerHTML = ` <div class="modal">
 
     <p class="otraPizza"> Busca otra Pizza, por favor !!! </p>
     <button class="ok" onclick=cerrarModal()> Ok </button>
     </div>
     `;
- 
+
 
 }
 
 function cerrarModal() {
     const modalCerrado = document.querySelector(".modal");
-        modalCerrado.style.display = "none"
-        addElements()
-        pizzas.forEach(p => {
-            mostrarInfo(p.nombre, p.precio, p.img, p.ingredientes)
-        
-        })
-     
+    modalCerrado.style.display = "none"
+    addElements()
+    pizzas.forEach(p => {
+        mostrarInfo(p.nombre, p.precio, p.img, p.ingredientes)
+
+    })
+
 }
- 
+
 pizzas.forEach(p => {
     mostrarInfo(p.nombre, p.precio, p.img, p.ingredientes)
 
@@ -101,7 +100,8 @@ pizzas.forEach(p => {
 btn.disabled = true;
 
 function verificar(value) {
-    if (value.length > 0) {
+    const valueTrim = value.trim()
+    if (valueTrim.length > 0) {
         btn.disabled = false;
     } else {
         btn.disabled = true;
@@ -114,14 +114,14 @@ btn.addEventListener("click", () => {
 
     pizzas.forEach(p => {
 
-        p.nombre.toUpperCase() == inputBuscar.value.toUpperCase() ? mostrarInfo(p.nombre, p.precio, p.img, p.ingredientes) : null
-       
+        p.nombre.toUpperCase() == inputBuscar.value.toUpperCase().trim() ? mostrarInfo(p.nombre, p.precio, p.img, p.ingredientes) : null
+
     });
 
-    
-    inputBuscar.value="";
+
+    inputBuscar.value = "";
     btn.disabled = true;
-    div_1.innerHTML == "" ? infoIncorrect () : null
+    div_1.innerHTML == "" ? infoIncorrect() : null
 })
 
 
