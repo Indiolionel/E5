@@ -33,15 +33,18 @@ const div = document.createElement("div");
 const div_1 = document.createElement("div");
 const inputBuscar = document.createElement("input")
 const btn = document.createElement("button");
+const btn2 = document.createElement("button");
 const seccion = document.querySelector("section")
 const newContent = document.createTextNode("Buscar");
+const newContent2 = document.createTextNode("Regresar");
 
 function addElements() {
     div.classList.add("container-buscar")
     inputBuscar.classList.add("idPizza")
-    inputBuscar.setAttribute("type", "text");
+    inputBuscar.setAttribute("type", "search");
     inputBuscar.setAttribute("onkeyup", "verificar(this.value)");
     btn.classList.add("boton");
+    btn2.classList.add("boton");
     div_1.setAttribute("id", "render");
 
 
@@ -49,7 +52,10 @@ function addElements() {
     seccion.appendChild(div);
     div.appendChild(inputBuscar);
     div.appendChild(btn);
+    div.appendChild(btn2);
+
     btn.appendChild(newContent);
+    btn2.appendChild(newContent2);
     localStorage.setItem("Pizzas", JSON.stringify(pizzas))
 }
 
@@ -67,6 +73,7 @@ function mostrarInfo(nombre, precio, img, ingredientes) {
      <img src="./Img/${img}" alt=" ${nombre}">   
      <p>Ingredientes: ${ingredientes}</p>
      </div>
+     
     `;
 }
 
@@ -77,8 +84,7 @@ function infoIncorrect() {
     <button class="ok" onclick=cerrarModal()> Ok </button>
     </div>
     `;
-
-
+    btn2.style.display = "none"
 }
 
 function cerrarModal() {
@@ -98,6 +104,7 @@ pizzas.forEach(p => {
 })
 
 btn.disabled = true;
+btn2.style.display = "none"
 
 function verificar(value) {
     const valueTrim = value.trim()
@@ -108,10 +115,18 @@ function verificar(value) {
     }
 }
 
+btn2.addEventListener("click", () => { 
+    div_1.innerHTML = ""
+    pizzas.forEach(p => {
+        mostrarInfo(p.nombre, p.precio, p.img, p.ingredientes)  
+    })
+    btn2.style.display = "none"
+})
+
+
 
 btn.addEventListener("click", () => {
     render.innerHTML = ""
-
     pizzas.forEach(p => {
 
         p.nombre.toUpperCase() == inputBuscar.value.toUpperCase().trim() ? mostrarInfo(p.nombre, p.precio, p.img, p.ingredientes) : null
@@ -121,6 +136,8 @@ btn.addEventListener("click", () => {
 
     inputBuscar.value = "";
     btn.disabled = true;
+    btn2.style.display = "block"
+
     div_1.innerHTML == "" ? infoIncorrect() : null
 })
 
